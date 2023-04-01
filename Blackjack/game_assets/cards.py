@@ -13,16 +13,35 @@ class Card:
     def __repr__(self) -> str:
         return f"{self.__name} {self.__value}"
 
+class Deck:
+    def __init__(self) -> None:
+        # TODO create cards
+        # TODO shuffle deck
+        self.create()
+
+    def create(self):
+        cards = [
+            ["2", 2],
+            ["3", 3],
+            ["4", 4],
+            ["5", 5],
+            ["6", 6],
+            ["7", 7],
+            ["8", 8],
+            ["9", 9],
+            ["10", 10],
+            ["King", 10],
+            ["Queen", 10],
+            ["Jack", 10],
+            ["Ace", 11]
+        ]
+
+        names = ["Heart", "Club", "Diamond", "Spade"]
+
+    def show(self):
+        pass
 
 if __name__ == "__main__":
-    card1 = Card("Spade King", 10)
-    card2 = Card("Club Ace", 11)
-    card3 = Card("Heart Queen", 10)
-
-    deck = [card1, card2, card3]
-
-    print(deck)
-    card1.change_value()
-    card2.change_value()
-    card3.change_value()
-    print(deck)
+    deck = Deck()
+    deck.create()
+    deck.show()
