@@ -48,13 +48,18 @@ class Deck:
         
         random.shuffle(self.__cards)
 
-    def show(self):
-        print(self.__cards)
-        print(f"Card count: {len(self.__cards)}")
+    def draw(self):
+        return self.__cards.pop(0)
+
+    @property
+    def card_count(self):
+        return len(self.__cards)
+    
+    @property
+    def cards(self):
+        return tuple(self.__cards)
 
 if __name__ == "__main__":
-    deck1 = Deck()
-    deck1.show()
-
-    deck2 = Deck()
-    deck2.show()
+    deck = Deck()
+    print(deck.card_count)
+    print(deck.cards)
