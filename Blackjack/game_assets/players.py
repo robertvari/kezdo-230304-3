@@ -12,7 +12,14 @@ class Player_Base:
         self.__hand.clear()
 
         self.__hand.append(deck.draw())
-        self.__hand.append(deck.draw())
+        hand_value = self.hand_value
+        
+        # check hand value before add new card
+        new_card = deck.draw()
+        if hand_value > 10 and new_card.value == 11:
+            new_card.change_value()
+
+        self.__hand.append(new_card)
 
     def draw_cards(self, deck):
         # TODO clear screen??
@@ -21,11 +28,26 @@ class Player_Base:
 
         while self.__playing:
             # TODO check hand value
+            hand_value = self.hand_value
 
-            # TODO check if hand value < 16 has to draw card
-            # TODO check if hand value < 19
-                # false: self.__playing = False
-            # TODO draw new card and append it to self.__hand
+            # TODO check if hand value < 18 has to draw card
+            if hand_value <= 18:
+                print(f"{self._name} draws a new card")
+                time.sleep(random.randint(1,3))
+                new_card = deck.draw()
+
+                if hand_value > 10 and new_card.value == 11:
+                    new_card.change_value()
+
+                self.__hand.append(new_card)
+            else:
+                time.sleep(random.randint(1,3))
+                print(f"{self._name} finishes his/her turn")
+                self.__playing = False
+
+    @property
+    def hand_value(self):
+        return sum([card.value for card in self.__hand])
 
     @staticmethod
     def get_random_name():
@@ -35,7 +57,7 @@ class Player_Base:
         return f"{random.choice(first_names)} {random.choice(last_names)}"
 
     def __str__(self) -> str:
-        return f"Name: {self._name}\nCredits: {self.__credits}\nCards: {self.__hand}"
+        return f"Name: {self._name}\nCredits: {self.__credits}\nCards: {self.__hand}\nHand value: {self.hand_value}"
 
 
 class HumanPlayer(Player_Base):
@@ -56,3 +78,4 @@ if __name__ == "__main__":
     ai_player = AIPlayer()
     ai_player.init_hand(deck)
     ai_player.draw_cards(deck)
+    print(ai_player)

@@ -8,6 +8,10 @@ class Card:
     def change_value(self):
         if self.__value == 11:
             self.__value = 1
+
+    @property
+    def value(self):
+        return self.__value
         
     def __str__(self) -> str:
         return f"Name: {self.__name} Value: {self.__value}"
