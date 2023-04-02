@@ -64,6 +64,7 @@ class Player_Base:
         if hand_value == 21:
             my_bet += self.__credits
 
+        print(f"{self._name} gives {my_bet} credits.")
         self.__credits -= my_bet
         return my_bet
             

@@ -34,6 +34,11 @@ class Blackjack:
         for p in self.__players:
             self.__credits += p.give_credit()
 
+        print(f"Total reward: {self.__credits}")
+
+        for p in self.__players:
+            p.draw_cards(self.__deck)
+
     def __create_players(self):
         ai_player1 = AIPlayer()
         ai_player2 = AIPlayer()
