@@ -67,7 +67,9 @@ class Player_Base:
         print(f"{self._name} gives {my_bet} credits.")
         self.__credits -= my_bet
         return my_bet
-            
+    
+    def give_reward(self, reward):
+        self.__credits += reward
 
     def _get_is_playing(self):
         return self.__playing
@@ -89,6 +91,10 @@ class Player_Base:
     @property
     def is_playing(self):
         return self.__playing
+
+    @property
+    def name(self):
+        return self._name
 
     @staticmethod
     def get_random_name():
