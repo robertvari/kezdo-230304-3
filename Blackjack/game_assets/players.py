@@ -45,9 +45,22 @@ class Player_Base:
                 print(f"{self._name} finishes his/her turn")
                 self.__playing = False
 
+    def _get_is_playing(self):
+        return self.__playing
+
+    def _set_is_playing(self, new_playing):
+        self.__playing = new_playing
+
+    def _add_card(self, new_card):
+        self.__hand.append(new_card)
+
     @property
     def hand_value(self):
         return sum([card.value for card in self.__hand])
+
+    @property
+    def hand(self):
+        return tuple(self.__hand)
 
     @staticmethod
     def get_random_name():
@@ -66,6 +79,21 @@ class HumanPlayer(Player_Base):
         # self._name = input("What is your name?")
         self._name = "Robert Vari"
 
+    def draw_cards(self, deck):
+        print(f"This is your turn {self._name.split()[0]}")
+
+        while self.__playing:
+            print(f"Your cards {self.hand}")
+            print(f"Your hand value: {self.hand_value}")
+
+            response = input("Do you want to draw a new card? (y/n)")
+            if response == "y":
+                new_card = deck.draw()
+                print(f"Your new card: {new_card}")
+                self.__hand.append(new_card)
+            else:
+                self.__playing = False
+
 class AIPlayer(Player_Base):
     pass
 
@@ -75,3 +103,6 @@ if __name__ == "__main__":
     
     deck = Deck()
     
+    player = HumanPlayer()
+    player.init_hand(deck)
+    player.draw_cards(deck)
