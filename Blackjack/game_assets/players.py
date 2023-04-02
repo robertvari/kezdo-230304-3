@@ -1,8 +1,8 @@
 import random
 
-class Player:
+class Player_Base:
     def __init__(self):
-        self.__name = self.get_random_name()
+        self._name = self.get_random_name()
         self.__credits = random.randint(10, 100)
         self.__hand = []
         self.__playing = True
@@ -15,12 +15,24 @@ class Player:
         return f"{random.choice(first_names)} {random.choice(last_names)}"
 
     def __str__(self) -> str:
-        return f"Name: {self.__name}\nCredits: {self.__credits}\nCards: {self.__hand}"
+        return f"Name: {self._name}\nCredits: {self.__credits}\nCards: {self.__hand}"
+
+
+class HumanPlayer(Player_Base):
+    def __init__(self):  # override base class __init__
+        super().__init__() # run base class __init__ to create attributes
+        # self._name = input("What is your name?")
+        self._name = "Robert Vari"
+
+class AIPlayer(Player_Base):
+    pass
+
 
 if __name__ == "__main__":
-    player1 = Player()
-    player2 = Player()
-    player3 = Player()
-    print(player1)
-    print(player2)
-    print(player3)
+    ai_player1 = AIPlayer()
+    ai_player2 = AIPlayer()
+    ai_player3 = AIPlayer()
+
+    my_player = HumanPlayer()
+
+    print(my_player)
