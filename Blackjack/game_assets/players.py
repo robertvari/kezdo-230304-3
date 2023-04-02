@@ -86,13 +86,21 @@ class HumanPlayer(Player_Base):
             print(f"Your cards {self.hand}")
             print(f"Your hand value: {self.hand_value}")
 
+            if self.hand_value > 20:
+                self._set_is_playing(False)
+                print("You finished your turn.")
+                return
+
             response = input("Do you want to draw a new card? (y/n)")
             if response == "y":
                 new_card = deck.draw()
                 print(f"Your new card: {new_card}")
                 self._add_card(new_card)
             else:
-                self._set_is_playing(False)
+                if self.hand_value < 16:
+                    print("You have to draw a card")
+                else:
+                    self._set_is_playing(False)
 
 class AIPlayer(Player_Base):
     pass
