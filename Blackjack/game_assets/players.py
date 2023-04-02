@@ -75,7 +75,3 @@ if __name__ == "__main__":
     
     deck = Deck()
     
-    ai_player = AIPlayer()
-    ai_player.init_hand(deck)
-    ai_player.draw_cards(deck)
-    print(ai_player)
