@@ -97,6 +97,10 @@ class Player_Base:
     def name(self):
         return self._name
 
+    @property
+    def credits(self):
+        return self.__credits
+
     @staticmethod
     def get_random_name():
         first_names = ["Marnie", "Johnathan", "Mahnoor", "Hassan", "Alissa", "Millie", "Qasim", "Damon", "Shreya", "Carly"]
@@ -126,7 +130,8 @@ class HumanPlayer(Player_Base):
 
             if self.hand_value > 20:
                 self._set_is_playing(False)
-                print("You finished your turn.")
+                print(f"You finished your turn. Your hand value: {self.hand_value}")
+                time.sleep(3)
                 return
 
             response = input("Do you want to draw a new card? (y/n)")
@@ -134,6 +139,7 @@ class HumanPlayer(Player_Base):
                 new_card = deck.draw()
                 print(f"Your new card: {new_card}")
                 self._add_card(new_card)
+                time.sleep(3)
             else:
                 if self.hand_value < 16:
                     print("You have to draw a card")

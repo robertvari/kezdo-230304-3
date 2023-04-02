@@ -6,6 +6,7 @@ from game_assets.players import AIPlayer, HumanPlayer
 class Blackjack:
     def __init__(self):
         self.__players = []
+        self.__human_player = None
         self.__deck = Deck()
         self.__credits = 0
 
@@ -61,6 +62,10 @@ class Blackjack:
             print(f"The winner is {winner.name} who wins {self.__credits} credits.")
             winner.give_reward(self.__credits)
 
+        if self.__human_player.credits <= 0:
+            print("You lost all your credits :( Maybe next time")
+            exit()
+            
         response = input("Do you want to play again? (y/n)")
         if response == "y":
             self.__game_loop()
@@ -72,9 +77,9 @@ class Blackjack:
         ai_player1 = AIPlayer()
         ai_player2 = AIPlayer()
         ai_player3 = AIPlayer()
-        player = HumanPlayer()
+        self.__human_player = HumanPlayer()
 
-        self.__players = [ai_player1, ai_player2, ai_player3, player]
+        self.__players = [ai_player1, ai_player2, ai_player3, self.__human_player]
 
     @staticmethod
     def clear_screen():
