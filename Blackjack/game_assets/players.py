@@ -64,12 +64,13 @@ class Player_Base:
         if hand_value == 21:
             my_bet += self.__credits
 
-        print(f"{self._name} gives {my_bet} credits.")
+        print(f"{self._name} has {self.__credits} cradits. Gives {my_bet} credits.")
         self.__credits -= my_bet
         return my_bet
     
     def give_reward(self, reward):
         self.__credits += reward
+        print(f"{self.name} now has {self.__credits} credits.")
 
     def _get_is_playing(self):
         return self.__playing

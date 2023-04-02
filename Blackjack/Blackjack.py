@@ -1,4 +1,4 @@
-import os, platform
+import os, platform, time
 from game_assets.cards import Deck
 from game_assets.players import AIPlayer, HumanPlayer
 
@@ -36,8 +36,15 @@ class Blackjack:
 
         print(f"Total reward: {self.__credits}")
 
+        time.sleep(4)
+        
+        print("="*50)
+
         for p in self.__players:
             p.draw_cards(self.__deck)
+            print("."*50)
+
+        print("="*50)
         
         # get winner
         self.__get_winner()
