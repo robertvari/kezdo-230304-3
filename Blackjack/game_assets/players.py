@@ -82,7 +82,7 @@ class HumanPlayer(Player_Base):
     def draw_cards(self, deck):
         print(f"This is your turn {self._name.split()[0]}")
 
-        while self.__playing:
+        while self._get_is_playing():
             print(f"Your cards {self.hand}")
             print(f"Your hand value: {self.hand_value}")
 
@@ -90,9 +90,9 @@ class HumanPlayer(Player_Base):
             if response == "y":
                 new_card = deck.draw()
                 print(f"Your new card: {new_card}")
-                self.__hand.append(new_card)
+                self._add_card(new_card)
             else:
-                self.__playing = False
+                self._set_is_playing(False)
 
 class AIPlayer(Player_Base):
     pass
