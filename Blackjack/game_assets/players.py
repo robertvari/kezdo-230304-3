@@ -45,6 +45,29 @@ class Player_Base:
                 print(f"{self._name} finishes his/her turn")
                 self.__playing = False
 
+    def give_credit(self) -> int:
+        my_bet = 0
+
+        if self.__credits <= 0:
+            print(f"{self._name} has not more credits.")
+            self.__playing = False
+            return my_bet
+
+        hand_value = self.hand_value
+
+        if hand_value < 18:
+            my_bet += 10 if 10 < self.__credits else self.__credits
+        
+        if hand_value >= 18 and hand_value < 21:
+            my_bet += 30 if 30 < self.__credits else self.__credits
+
+        if hand_value == 21:
+            my_bet += self.__credits
+
+        self.__credits -= my_bet
+        return my_bet
+            
+
     def _get_is_playing(self):
         return self.__playing
 
@@ -62,12 +85,19 @@ class Player_Base:
     def hand(self):
         return tuple(self.__hand)
 
+    @property
+    def is_playing(self):
+        return self.__playing
+
     @staticmethod
     def get_random_name():
         first_names = ["Marnie", "Johnathan", "Mahnoor", "Hassan", "Alissa", "Millie", "Qasim", "Damon", "Shreya", "Carly"]
         last_names =  ["Roy", "Aguirre", "Sandoval", "Rogers", "Cole", "Matthams", "Allen", "Stokes", "Deleon", "Hampton"]
 
         return f"{random.choice(first_names)} {random.choice(last_names)}"
+
+    def __repr__(self) -> str:
+        return f"{self._name}"
 
     def __str__(self) -> str:
         return f"Name: {self._name}\nCredits: {self.__credits}\nCards: {self.__hand}\nHand value: {self.hand_value}"
@@ -110,7 +140,10 @@ if __name__ == "__main__":
     from cards import Deck
     
     deck = Deck()
+    ai_player = AIPlayer()
     
-    player = HumanPlayer()
-    player.init_hand(deck)
-    player.draw_cards(deck)
+    for i in range(10):
+        if not ai_player.is_playing:
+            break
+        ai_player.init_hand(deck)
+        print(ai_player.give_credit())
